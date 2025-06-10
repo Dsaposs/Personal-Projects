@@ -34,6 +34,8 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
 }
 
 tasks.named('test') {

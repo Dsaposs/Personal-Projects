@@ -1,4 +1,4 @@
-package com.ttrpg.ttrpghelper;
+package com.ttrpg.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +14,7 @@ public class TTRPGHelperApplication {
         SpringApplication.run(TTRPGHelperApplication.class, args);
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/home")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
         return String.format("Hello %s!", name);
     }
