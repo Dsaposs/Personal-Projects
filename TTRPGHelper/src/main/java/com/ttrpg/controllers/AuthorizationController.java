@@ -1,5 +1,7 @@
-package com.ttrpg.application;
+package com.ttrpg.controllers;
 
+import com.ttrpg.entities.User;
+import com.ttrpg.services.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
