@@ -1,9 +1,6 @@
 package com.ttrpg.application;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -15,8 +12,23 @@ import lombok.*;
 public class CharacterSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer characterId;
+
+    @Column(nullable = false)
     private Integer userId;
-    private String name;
-    private Integer health;
+
+    @Column(nullable = false)
+    private String characterName;
+
+    @Column(nullable = false)
+    private Integer strength;
+
+    @Column(nullable = false)
+    private Integer wits;
+
+    @Column(nullable = false)
+    private Integer empathy;
+
+    @Column(nullable = false)
+    private Integer agility;
 }
