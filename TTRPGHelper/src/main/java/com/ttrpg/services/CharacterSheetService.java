@@ -1,5 +1,7 @@
-package com.ttrpg.application;
+package com.ttrpg.services;
 
+import com.ttrpg.entities.CharacterSheet;
+import com.ttrpg.repositories.CharacterSheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

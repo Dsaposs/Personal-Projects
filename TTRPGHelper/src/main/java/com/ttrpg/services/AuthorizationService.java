@@ -1,5 +1,7 @@
-package com.ttrpg.application;
+package com.ttrpg.services;
 
+import com.ttrpg.entities.User;
+import com.ttrpg.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

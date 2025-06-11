@@ -1,4 +1,4 @@
-package com.ttrpg.application;
+package com.ttrpg.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,5 +1,6 @@
-package com.ttrpg.application;
+package com.ttrpg.repositories;
 
+import com.ttrpg.entities.CharacterSheet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

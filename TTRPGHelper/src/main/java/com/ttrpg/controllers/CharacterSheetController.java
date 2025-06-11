@@ -1,5 +1,7 @@
-package com.ttrpg.application;
+package com.ttrpg.controllers;
 
+import com.ttrpg.entities.CharacterSheet;
+import com.ttrpg.services.CharacterSheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

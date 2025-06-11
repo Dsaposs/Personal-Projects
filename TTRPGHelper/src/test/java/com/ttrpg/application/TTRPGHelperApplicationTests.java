@@ -1,6 +1,8 @@
 package com.ttrpg.application;
 
 
+import com.ttrpg.entities.User;
+import com.ttrpg.repositories.UsersRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
