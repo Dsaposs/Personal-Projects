@@ -1,8 +1,7 @@
 package com.ttrpg.auth.controllers;
 
-import com.ttrpg.users.repositories.entities.User;
-import com.ttrpg.users.services.AuthorizationService;
-import com.ttrpg.users.services.GameService;
+import com.ttrpg.auth.repositories.entities.User;
+import com.ttrpg.auth.services.AuthorizationService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,20 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping(path="auth")
 public class AuthorizationController {
     private final AuthorizationService authorizationService;
     private final PasswordEncoder passwordEncoder;
-    private final GameService gameService;
 
     @Autowired
-    public AuthorizationController(AuthorizationService authorizationService, PasswordEncoder passwordEncoder, GameService gameService) {
+    public AuthorizationController(AuthorizationService authorizationService, PasswordEncoder passwordEncoder) {
         this.authorizationService = authorizationService;
         this.passwordEncoder = passwordEncoder;
-        this.gameService = gameService;
     }
 
     @PostMapping(path="/add")
@@ -38,9 +34,6 @@ public class AuthorizationController {
 
     @PostMapping(path="/add/{gameId}")
     public ResponseEntity<String> addNewTempUser (@PathParam ("gameId") Integer gameId, @RequestParam String u) {
-        if(gameService.getGameById(gameId) == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game Not Found");
-
         User n = new User();
         n.setUsername(u);
         n.setRole("TEMP_USER");

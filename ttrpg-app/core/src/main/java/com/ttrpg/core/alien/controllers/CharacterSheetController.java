@@ -1,8 +1,8 @@
 package com.ttrpg.core.alien.controllers;
 
-import com.ttrpg.alien.repositories.dto.CharacterSheetDTO;
-import com.ttrpg.alien.repositories.entities.CharacterSheet;
-import com.ttrpg.alien.services.CharacterSheetService;
+import com.ttrpg.core.alien.repositories.dto.CharacterSheetDTO;
+import com.ttrpg.core.alien.repositories.entities.CharacterSheet;
+import com.ttrpg.core.alien.services.CharacterSheetService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.ttrpg.auth.services;
 
-import com.ttrpg.users.repositories.UsersRepository;
-import com.ttrpg.users.repositories.entities.User;
+import com.ttrpg.auth.repositories.UsersRepository;
+import com.ttrpg.auth.repositories.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
