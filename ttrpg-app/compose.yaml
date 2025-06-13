@@ -1,10 +1,19 @@
 version: '3.8'
 services:
-#  mysql:
-#    image: mysql:latest
-#    environment:
-#      - MYSQL_DATABASE=ttrpg_helper_db
-#      - MYSQL_USER=db_user
-#      - MYSQL_PASSWORD=secret
-#    ports:
-#      - '3306:3306'
+  auth_db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=ttrpg_helper_db
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=secret
+    ports:
+      - '3306:3306'
+
+  core_db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=ttrpg_helper_db
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=secret
+    ports:
+      - '3307:3307'

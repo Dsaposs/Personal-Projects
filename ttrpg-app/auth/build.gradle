@@ -1,0 +1,11 @@
+bootBuildImage {
+    imageName = 'dsaposs/ttrpg/auth_app:latest'
+    publish = true
+    docker {
+        publishRegistry {
+            username = 'dsaposs'
+            password = 'zx5al9tyE'
+            url = 'https://index.docker.io/v1/'
+        }
+    }
+}
