@@ -1,0 +1,3 @@
+rootProject.name = 'ttrpg-app'
+
+include('core', 'auth')
