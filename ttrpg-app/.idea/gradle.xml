@@ -9,8 +9,24 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/auth" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/service-registry" />
+            <option value="$PROJECT_DIR$/ttrpg-helper-lib" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/api" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api" />
+            <option value="$PROJECT_DIR$/auth" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/service-registry" />
+            <option value="$PROJECT_DIR$/ttrpg-helper-lib" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -19,8 +35,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/auth" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/service-registry" />
+            <option value="$PROJECT_DIR$/ttrpg-helper-lib" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -29,8 +48,24 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/auth" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/service-registry" />
+            <option value="$PROJECT_DIR$/ttrpg-helper-lib" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/service-registry" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api" />
+            <option value="$PROJECT_DIR$/auth" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/service-registry" />
+            <option value="$PROJECT_DIR$/ttrpg-helper-lib" />
           </set>
         </option>
       </GradleProjectSettings>

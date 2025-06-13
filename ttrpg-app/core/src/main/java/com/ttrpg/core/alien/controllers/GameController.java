@@ -8,12 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path="game")
 public class GameController {
     private final GameService gameService;
     private final ModelMapper modelMapper;
@@ -24,13 +22,13 @@ public class GameController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/game/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<GameDTO> getGameByUser(@PathParam("id") Integer id) {
         GameDTO gameDTO = convertToDto(gameService.getGameById(id));
         return new ResponseEntity<>(gameDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/game/create")
+    @PostMapping("/create")
     public ResponseEntity<String> createGame(@RequestBody GameDTO gameInfo) {
         Game g = convertToEntity(gameInfo);
         gameService.save(g);

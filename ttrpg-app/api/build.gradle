@@ -1,5 +1,5 @@
 bootBuildImage {
-    imageName = 'dsaposs/ttrpg/core_app:latest'
+    imageName = 'dsaposs/ttrpg/auth_app:latest'
     publish = true
     docker {
         publishRegistry {
@@ -11,12 +11,10 @@ bootBuildImage {
 }
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'com.mysql:mysql-connector-j'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
-    implementation 'org.modelmapper:modelmapper:3.2.0'
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc'
     implementation("org.projectlombok:lombok")
+    implementation 'org.modelmapper:modelmapper:3.2.0'
 
     implementation project(':ttrpg-helper-lib')
 

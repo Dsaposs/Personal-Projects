@@ -1,0 +1,25 @@
+ext {
+    set('springCloudVersion', "2025.0.0")
+}
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+bootBuildImage {
+    imageName = 'dsaposs/ttrpg/service_registry_app:latest'
+    publish = true
+    docker {
+        publishRegistry {
+            username = 'dsaposs'
+            password = 'zx5al9tyE'
+            url = 'https://index.docker.io/v1/'
+        }
+    }
+}

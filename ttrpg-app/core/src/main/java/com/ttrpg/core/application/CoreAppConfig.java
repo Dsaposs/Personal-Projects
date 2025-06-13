@@ -1,8 +1,9 @@
 package com.ttrpg.core.application;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,25 +11,26 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig {
-
+public class CoreAppConfig {
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return (UserDetailsService) ServiceProvider.getAuthService(restTemplate());
+//    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/home/**").permitAll()
-                        .requestMatchers("/auth/add").permitAll()
-                        .requestMatchers("/game/**").hasAnyRole("USER", "TEMP_USER", "ADMIN")
-                        .requestMatchers("/character/**").hasAnyRole("USER", "TEMP_USER", "ADMIN")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().hasAnyRole("USER", "ADMIN"))
+//                        .requestMatchers("/game/**").hasAnyRole("USER", "TEMP_USER", "ADMIN")
+//                        .requestMatchers("/character/**").hasAnyRole("USER", "TEMP_USER", "ADMIN")
+                        .anyRequest().permitAll())
 //                .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 
@@ -36,4 +38,12 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {return new RestTemplate();}
 }

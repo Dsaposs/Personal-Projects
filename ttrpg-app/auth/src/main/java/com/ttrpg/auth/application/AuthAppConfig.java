@@ -1,5 +1,7 @@
 package com.ttrpg.auth.application;
 
+import com.ttrpg.helper.enums.Roles;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -14,20 +16,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig {
+public class AuthAppConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/home/**").permitAll()
-                        .requestMatchers("/auth/add").permitAll()
-                        .requestMatchers("/game/**").hasAnyRole("USER", "TEMP_USER", "ADMIN")
-                        .requestMatchers("/character/**").hasAnyRole("USER", "TEMP_USER", "ADMIN")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().hasAnyRole("USER", "ADMIN"))
-//                .formLogin(Customizer.withDefaults())
+                        .requestMatchers("/authorization/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole(Roles.ADMIN.getRole())
+                        .anyRequest().hasAnyRole(Roles.USER.getRole(), Roles.ADMIN.getRole()))
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
@@ -35,5 +33,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

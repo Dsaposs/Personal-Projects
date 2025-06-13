@@ -1,5 +1,4 @@
-
 FROM openjdk:17-jdk-slim
-COPY target/*.jar auth.jar
+COPY target/*.jar auth_app.jar
 VOLUME /tmp
-ENTRYPOINT ["java", "-jar", "auth.jar"]
+ENTRYPOINT ["java", "-jar", "auth_app.jar"]
