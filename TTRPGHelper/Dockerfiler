@@ -1,0 +1,5 @@
+
+FROM openjdk:17-jdk-slim
+COPY target/*.jar alien-app.jar
+VOLUME /tmp
+ENTRYPOINT ["java", "-jar", "alien-app.jar"]

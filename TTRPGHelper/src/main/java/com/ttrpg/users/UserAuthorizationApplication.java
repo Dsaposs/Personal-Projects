@@ -1,5 +1,4 @@
-package com.ttrpg;
-
+package com.ttrpg.users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class TTRPGHelperApplication {
+public class UserAuthorizationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(com.ttrpg.users.TTRPGHelperApplication.class, args);
+        SpringApplication.run(UserAuthorizationApplication.class, args);
     }
 
     @GetMapping("/home")

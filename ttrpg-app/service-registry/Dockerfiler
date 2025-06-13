@@ -1,0 +1,5 @@
+
+FROM openjdk:17-jdk-slim
+COPY target/*.jar core.jar
+VOLUME /tmp
+ENTRYPOINT ["java", "-jar", "service_registry_app.jar"]
