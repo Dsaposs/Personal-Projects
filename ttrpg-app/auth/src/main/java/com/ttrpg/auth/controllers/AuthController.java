@@ -1,19 +1,24 @@
 package com.ttrpg.auth.controllers;
 
-import com.ttrpg.auth.repositories.entities.User;
 import com.ttrpg.auth.services.AuthService;
-import com.ttrpg.helper.enums.Roles;
+import com.ttrpg.helper.services.auth.dto.UserDTO;
+import com.ttrpg.helper.services.auth.dto.UserDetailsDTO;
+import com.ttrpg.helper.services.auth.entites.User;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+import static com.ttrpg.helper.services.auth.AuthConstants.*;
+
 @RestController
-@RequestMapping(path="authorization")
+@RequestMapping(path=AUTHORIZATION_URI)
 public class AuthController {
     private final AuthService authService;
     private final PasswordEncoder passwordEncoder;
@@ -25,35 +30,52 @@ public class AuthController {
     }
 
     @GetMapping
-    public ResponseEntity<UserDetails> getUser(@RequestParam("u") String name){
+    public ResponseEntity<UserDetailsDTO> getUser(@RequestParam("u") String name){
         UserDetails details = authService.loadUserByUsername(name);
-        return new ResponseEntity<>(details, HttpStatus.OK);
+        List<String> roles = details.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .map(auth -> auth.startsWith("ROLE_") ? auth.substring(5) : auth)
+                .toList();
+        UserDetailsDTO resp = new UserDetailsDTO(
+                details.getUsername(),
+                details.getPassword(),
+                roles
+        );
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
+//    public ResponseEntity<UserDetailsDTO> getUser(@RequestParam("u") String name){
+//        UserDetails details = authService.loadUserByUsername(name);
+//        UserDetailsDTO resp = new UserDetailsDTO(
+//                details.getUsername(),
+//                details.getPassword(),
+//                details.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
+//        );
+//        return new ResponseEntity<>(resp, HttpStatus.OK);
+//    }
 
-    @PostMapping(path="/add")
+    @PostMapping(path=AUTHORIZATION_ADD_URI)
     public ResponseEntity<String> addNewUser (@RequestParam String u, @RequestParam String p) {
         User n = new User();
         n.setUsername(u);
         n.setPassword(passwordEncoder.encode(p));
-        n.setRole(Roles.USER.getRole());
+        n.setRole(USER);
         authService.save(n);
         return new ResponseEntity<>("New User Created", HttpStatus.OK);
     }
 
-    @PostMapping(path="/add/{gameId}")
-    public ResponseEntity<String> addNewTempUser (@PathParam ("gameId") Integer gameId, @RequestParam String u) {
+    @PostMapping(path=AUTHORIZATION_ADD_TEMP_URI)
+    public ResponseEntity<String> addNewTempUser (@PathParam (TEMP_USER_HOST_ID) Integer gameId, @RequestParam String u) {
         User n = new User();
         n.setUsername(u);
-        n.setRole(Roles.TEMP_USER.getRole());
+        n.setRole(TEMP_USER);
         n.setPassword(passwordEncoder.encode(u + "#" + gameId));
         authService.save(n);
         return new ResponseEntity<>("New Temporary User Created", HttpStatus.OK);
     }
 
     //TODO move this to admin controller
-//    @PreAuthorize("hasRole(Roles.ADMIN.getRole())")
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<User> getAllUsers() {
-        return authService.findAll();
+    @GetMapping(path=AUTHORIZATION_ALL_URI)
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return new ResponseEntity<>(authService.findAll().stream().map(UserDTO::convertEntityToDto).toList(), HttpStatus.OK);
     }
 }

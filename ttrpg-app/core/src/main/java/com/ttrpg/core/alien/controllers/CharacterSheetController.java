@@ -1,49 +1,41 @@
 package com.ttrpg.core.alien.controllers;
 
-import com.ttrpg.core.alien.repositories.dto.CharacterSheetDTO;
-import com.ttrpg.core.alien.repositories.entities.CharacterSheet;
 import com.ttrpg.core.alien.services.CharacterSheetService;
-import org.modelmapper.ModelMapper;
+import com.ttrpg.helper.services.core.alien.dto.CharacterSheetDTO;
+import com.ttrpg.helper.services.core.alien.entities.CharacterSheet;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.ttrpg.helper.services.core.CoreConstants.*;
+
 @RestController()
-@RequestMapping(path="character")
+@RequestMapping(path=CHARACTER_URI)
 public class CharacterSheetController {
     private final CharacterSheetService characterSheetService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public CharacterSheetController(CharacterSheetService characterSheetService, ModelMapper modelMapper) {
+    public CharacterSheetController(CharacterSheetService characterSheetService) {
         this.characterSheetService = characterSheetService;
-        this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/{userId}/{characterId}")
-    public ResponseEntity<CharacterSheetDTO> getCharacterSheet(@PathVariable("userId") String userId, @PathVariable("characterId") String characterId) {
+    @GetMapping(CHARACTER_BY_ID_URI)
+    public ResponseEntity<CharacterSheetDTO> getCharacterSheet(@PathParam(USER_ID) String userId, @PathParam(CHARACTER_ID) String characterId) {
         CharacterSheet cs = characterSheetService.findCharacterSheet(Integer.valueOf(userId), Integer.valueOf(characterId));
-        return new ResponseEntity<>(convertToDto(cs), HttpStatus.OK);
+        return new ResponseEntity<>(CharacterSheetDTO.convertEntityToDto(cs), HttpStatus.OK);
     }
 
-    @PostMapping("/{userId}")
-    public ResponseEntity<String> createCharacterSheet(@PathVariable("userId") String userId, @RequestBody CharacterSheet characterSheet) {
+    @PostMapping(CHARACTERS_FOR_USER_URI)
+    public ResponseEntity<String> createCharacterSheet(@PathParam(USER_ID) String userId, @RequestBody CharacterSheetDTO characterSheet) {
         characterSheet.setUserId(Integer.valueOf(userId));
-        characterSheetService.save(characterSheet);
+        characterSheetService.save(CharacterSheetDTO.convertDtoToEntity(characterSheet));
         return new ResponseEntity<>("New Character Sheet Created", HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping(ALL_CHARACTERS_URI)
     public @ResponseBody Iterable<CharacterSheet> getAllCharacterSheets() {
         return characterSheetService.findAll();
-    }
-
-    private CharacterSheetDTO convertToDto(CharacterSheet cs) {
-        return modelMapper.map(cs, CharacterSheetDTO.class);
-    }
-
-    private CharacterSheet convertToEntity(CharacterSheetDTO dto) {
-        return modelMapper.map(dto, CharacterSheet.class);
     }
 }

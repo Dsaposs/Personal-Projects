@@ -1,7 +1,7 @@
 package com.ttrpg.auth.services;
 
 import com.ttrpg.auth.repositories.UsersRepository;
-import com.ttrpg.auth.repositories.entities.User;
+import com.ttrpg.helper.services.auth.entites.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +29,7 @@ public class AuthService implements UserDetailsService {
         throw new UsernameNotFoundException("User not found with username: " + username);
     }
 
-    public Iterable<User> findAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 

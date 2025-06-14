@@ -1,6 +1,5 @@
 package com.ttrpg.api.application;
 
-import com.ttrpg.helper.enums.Roles;
 import org.modelmapper.ModelMapper;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.client.RestTemplate;
 
+import static com.ttrpg.helper.services.auth.AuthConstants.*;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -24,8 +25,9 @@ public class ApiAppConfig {
     {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .anyRequest().hasRole(Roles.USER.getRole()))
-                .httpBasic(Customizer.withDefaults())
+                        //.requestMatchers(AUTHORIZATION_URI +"/**").permitAll()
+                        .anyRequest().permitAll())//.hasRole(USER)
+//                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.ttrpg.api.application;
 
+import com.ttrpg.helper.services.auth.AuthClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,9 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class AuthorizationService implements UserDetailsService {
-
-    public static final String AUTHORIZATION_SERVICE = "http://authorization-service/";
-    final RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     @Autowired
     public AuthorizationService(RestTemplate restTemplate) {
@@ -20,6 +19,6 @@ public class AuthorizationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return restTemplate.getForObject(AUTHORIZATION_SERVICE + "authorization?u=" + username, UserDetails.class);
+        return AuthClient.loadUserByUsername(username, restTemplate);
     }
 }

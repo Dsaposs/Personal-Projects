@@ -17,10 +17,6 @@ import org.springframework.web.client.RestTemplate;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class CoreAppConfig {
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return (UserDetailsService) ServiceProvider.getAuthService(restTemplate());
-//    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
@@ -37,10 +33,6 @@ public class CoreAppConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
     }
 
     @Bean

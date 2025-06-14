@@ -1,4 +1,4 @@
-package com.ttrpg.core.alien.repositories.entities;
+package com.ttrpg.helper.services.core.alien.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
