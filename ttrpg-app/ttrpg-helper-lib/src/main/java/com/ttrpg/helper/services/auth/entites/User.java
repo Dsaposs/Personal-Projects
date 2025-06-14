@@ -1,4 +1,4 @@
-package com.ttrpg.core.alien.repositories.entities;
+package com.ttrpg.helper.services.auth.entites;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,20 +6,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Game {
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer gameId;
+    private Integer id;
 
-    private Integer ownerId;
+    private String username;
 
-    private List<Integer> playerIds;
+    private String password;
+
+    private String role;
 }

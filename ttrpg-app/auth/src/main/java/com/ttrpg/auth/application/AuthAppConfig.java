@@ -1,6 +1,5 @@
 package com.ttrpg.auth.application;
 
-import com.ttrpg.helper.enums.Roles;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static com.ttrpg.helper.services.auth.AuthConstants.*;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -23,20 +24,15 @@ public class AuthAppConfig {
     {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/authorization/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole(Roles.ADMIN.getRole())
-                        .anyRequest().hasAnyRole(Roles.USER.getRole(), Roles.ADMIN.getRole()))
-                .httpBasic(Customizer.withDefaults())
+                        .anyRequest().permitAll())
+                        //.requestMatchers(AUTHORIZATION_URI +"/**").permitAll()
+                        //.requestMatchers(ADMIN_URI + "/**").hasRole(ADMIN)).anyRequest().hasAnyRole(USER, ADMIN)
+//                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
     }
 }
