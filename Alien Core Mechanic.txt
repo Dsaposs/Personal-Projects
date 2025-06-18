@@ -1,0 +1,14 @@
+Alien Core Mechanic
+
+- Determine Target Number of Successes/Difficulty (default 1)
+- Gather Dice Equal to the skill being checked
+- Add extra die per advantage
+- Remove extra die per disadvantage
+- Add Stress dice and Roll
+- Determine Results
+	- One 6 or higher is required per difficulty value
+	- No 6's results in failure
+	- Any 1's on a stress die results in a critical fail
+- if success gain one stunt per success over the target number
+- if failed have the ability to push
+	- re-roll all non-6 die

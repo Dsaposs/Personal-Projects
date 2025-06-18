@@ -1,0 +1,14 @@
+Die Core Mechanic
+
+- Determine Target Number of Successes/Difficulty (default 0)
+- Gather Dice Equal to the skill being checked
+- Add extra die per advantage
+- Remove extra die per disadvantage
+- Roll
+- Apply difficulty, remove one success per difficulty
+	- if no dice remain check fails
+- Determine Results
+	- One 4 or higher results in success
+	- No successes results in failure
+	- if no successes and at least one 1 results in critical fail
+- if success gain one Special per die with 6 over the target number
