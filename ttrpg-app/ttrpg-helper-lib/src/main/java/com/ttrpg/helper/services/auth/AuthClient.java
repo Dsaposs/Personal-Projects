@@ -1,6 +1,7 @@
 package com.ttrpg.helper.services.auth;
 
 import com.ttrpg.helper.services.auth.dto.UserDetailsDTO;
+import com.ttrpg.helper.services.auth.dto.UsersListDTO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.client.RestTemplate;
@@ -14,5 +15,9 @@ public class AuthClient {
                 .password(res.getPassword())
                 .roles(res.getAuthorities().get(0))
                 .build();
+    }
+
+    public static UsersListDTO loadAllUsers(RestTemplate restTemplate) throws UsernameNotFoundException {
+        return restTemplate.getForObject(AUTHORIZATION_SERVICE + "authorization/all", UsersListDTO.class);
     }
 }

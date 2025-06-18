@@ -1,4 +1,4 @@
-package com.ttrpg.core.alien.repositories;
+package com.ttrpg.core.application.repositories;
 
 import com.ttrpg.helper.services.core.alien.entities.CharacterSheet;
 import org.springframework.data.jpa.repository.JpaRepository;

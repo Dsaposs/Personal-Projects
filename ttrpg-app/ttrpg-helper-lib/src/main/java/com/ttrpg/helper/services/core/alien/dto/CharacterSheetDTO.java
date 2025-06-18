@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Data
 @Getter
 @Setter
@@ -16,10 +18,7 @@ public class CharacterSheetDTO {
     private Integer characterId;
     private Integer userId;
     private String characterName;
-    private Integer strength;
-    private Integer wits;
-    private Integer empathy;
-    private Integer agility;
+    private Map<String, Integer> stats;
 
     private static final EntityDtoMapper<CharacterSheet,CharacterSheetDTO> entityDtoMapper = new EntityDtoMapper<>();
 

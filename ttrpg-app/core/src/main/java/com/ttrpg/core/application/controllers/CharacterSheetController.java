@@ -1,6 +1,6 @@
-package com.ttrpg.core.alien.controllers;
+package com.ttrpg.core.application.controllers;
 
-import com.ttrpg.core.alien.services.CharacterSheetService;
+import com.ttrpg.core.application.services.CharacterSheetService;
 import com.ttrpg.helper.services.core.alien.dto.CharacterSheetDTO;
 import com.ttrpg.helper.services.core.alien.entities.CharacterSheet;
 import jakarta.websocket.server.PathParam;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import static com.ttrpg.helper.services.core.CoreConstants.*;
 
+
+//for character creation
 @RestController()
 @RequestMapping(path=CHARACTER_URI)
 public class CharacterSheetController {
@@ -28,8 +30,7 @@ public class CharacterSheetController {
     }
 
     @PostMapping(CHARACTERS_FOR_USER_URI)
-    public ResponseEntity<String> createCharacterSheet(@PathParam(USER_ID) String userId, @RequestBody CharacterSheetDTO characterSheet) {
-        characterSheet.setUserId(Integer.valueOf(userId));
+    public ResponseEntity<String> createCharacterSheet(@RequestBody CharacterSheetDTO characterSheet) {
         characterSheetService.save(CharacterSheetDTO.convertDtoToEntity(characterSheet));
         return new ResponseEntity<>("New Character Sheet Created", HttpStatus.OK);
     }

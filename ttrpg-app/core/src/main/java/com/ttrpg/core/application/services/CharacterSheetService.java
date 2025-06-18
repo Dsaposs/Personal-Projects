@@ -1,6 +1,6 @@
-package com.ttrpg.core.alien.services;
+package com.ttrpg.core.application.services;
 
-import com.ttrpg.core.alien.repositories.CharacterSheetRepository;
+import com.ttrpg.core.application.repositories.CharacterSheetRepository;
 import com.ttrpg.helper.services.core.alien.entities.CharacterSheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

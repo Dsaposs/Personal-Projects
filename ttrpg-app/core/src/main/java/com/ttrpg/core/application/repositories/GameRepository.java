@@ -1,4 +1,4 @@
-package com.ttrpg.core.alien.repositories;
+package com.ttrpg.core.application.repositories;
 
 import com.ttrpg.helper.services.core.alien.entities.Game;
 import org.springframework.data.jpa.repository.JpaRepository;

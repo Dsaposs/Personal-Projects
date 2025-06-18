@@ -30,7 +30,7 @@ public class AuthController {
     }
 
     @GetMapping
-    public ResponseEntity<UserDetailsDTO> getUser(@RequestParam("u") String name){
+    public ResponseEntity<UserDetailsDTO> getUser(@RequestParam("u") String name) {
         UserDetails details = authService.loadUserByUsername(name);
         List<String> roles = details.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -43,15 +43,6 @@ public class AuthController {
         );
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
-//    public ResponseEntity<UserDetailsDTO> getUser(@RequestParam("u") String name){
-//        UserDetails details = authService.loadUserByUsername(name);
-//        UserDetailsDTO resp = new UserDetailsDTO(
-//                details.getUsername(),
-//                details.getPassword(),
-//                details.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
-//        );
-//        return new ResponseEntity<>(resp, HttpStatus.OK);
-//    }
 
     @PostMapping(path=AUTHORIZATION_ADD_URI)
     public ResponseEntity<String> addNewUser (@RequestParam String u, @RequestParam String p) {
@@ -73,7 +64,7 @@ public class AuthController {
         return new ResponseEntity<>("New Temporary User Created", HttpStatus.OK);
     }
 
-    //TODO move this to admin controller
+    //TODO add admin/service authorization requirement
     @GetMapping(path=AUTHORIZATION_ALL_URI)
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return new ResponseEntity<>(authService.findAll().stream().map(UserDTO::convertEntityToDto).toList(), HttpStatus.OK);

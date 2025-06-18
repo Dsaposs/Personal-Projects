@@ -1,10 +1,9 @@
-package com.ttrpg.core.alien.controllers;
+package com.ttrpg.core.application.controllers;
 
 import com.ttrpg.helper.services.core.alien.dto.GameDTO;
 import com.ttrpg.helper.services.core.alien.entities.Game;
-import com.ttrpg.core.alien.services.GameService;
+import com.ttrpg.core.application.services.GameService;
 import jakarta.websocket.server.PathParam;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping(GAME_BY_USER_URI)
+    @GetMapping(GAMES_BY_USER_URI)
     public ResponseEntity<GameDTO> getGameByUser(@PathParam(USER_ID) Integer userId) {
         GameDTO gameDTO = GameDTO.convertEntityToDto(gameService.getGameById(userId));
         return new ResponseEntity<>(gameDTO, HttpStatus.OK);
@@ -32,6 +31,12 @@ public class GameController {
     public ResponseEntity<String> createGame(@RequestBody GameDTO gameInfo) {
         Game g = GameDTO.convertDtoToEntity(gameInfo);
         gameService.save(g);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(GAME_BY_GAME_ID_URI)
+    public ResponseEntity<String> createGameSession(@PathParam(GAME_ID) Integer gameId) {
+        gameService.createGameSession(gameId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
